@@ -39,19 +39,9 @@
       padding: 10px;
       border: 1px solid #ccc;
       overflow: auto;
-    }
-
-    pre {
-      width: 300px;
-      height: 200px;
-      background-color: #f4f4f4;
-      border: 1px solid #ccc;
-      padding: 10px;
-      overflow: auto;
-      font-family: monospace;
+      margin: 0;
       white-space: pre-wrap;
       word-wrap: break-word;
-      **margin: 0;** /* ← これを追加 */
     }
 
     button {
@@ -67,13 +57,13 @@
 
   <div class="container">
     <div class="column">
-      <textarea id="input" placeholder="ここにファイルパスを入力してください..."></textarea>
+      <textarea id="input" placeholder="入力してください"></textarea>
       <button id="clearBtn">クリア</button>
     </div>
 
     <div class="column">
       <pre><code id="output"></code></pre>
-      <button id="copyBtn">コピーする</button>
+      <button id="copyBtn">コピー</button>
     </div>
   </div>
 
@@ -100,7 +90,7 @@
         document.execCommand("copy");
         copyBtn.textContent = "コピーしました！";
         setTimeout(() => {
-          copyBtn.textContent = "コピーする";
+          copyBtn.textContent = "コピー";
         }, 1500);
       } catch (err) {
         alert("コピーに失敗しました");
