@@ -3,17 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <title>パス置換ツール</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+  <link href="https://fonts.google.com/specimen/Source+Code+Pro&display=swap" rel="stylesheet">
+
   <style>
+
     * {
       box-sizing: border-box;
     }
 
     body {
-      font-family: sans-serif;
+      font-family: 'Noto Sans JP', sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
       padding: 20px;
+      background-color: #f5f5f5;
     }
 
     .container {
@@ -31,9 +37,9 @@
 
     textarea,
     pre {
-      width: 300px;
+      width: 350px;
       height: 200px;
-      font-family: monospace;
+      /* font-family: monospace; */
       font-size: 14px;
       line-height: 1.5;
       padding: 10px;
@@ -42,13 +48,36 @@
       margin: 0;
       white-space: pre-wrap;
       word-wrap: break-word;
+      background-color: #ffffff;
+    }
+
+    textarea {
+      resize: vertical;
     }
 
     button {
-      margin-top: 8px;
+      font-family: 'Noto Sans JP', sans-serif;
+      margin-top: 24px;
       padding: 8px 16px;
       font-size: 14px;
       cursor: pointer;
+      width: 140px;
+      text-align: center;
+      white-space: nowrap;
+      border: none;
+      border-radius: 6px;
+      background-color: #4a90e2;
+      color: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+      transition: background-color 0.2s ease, transform 0.1s ease;
+    }
+
+    button:hover {
+      background-color: #357ab8;
+    }
+
+    button:active {
+      transform: scale(0.97);
     }
   </style>
 </head>
@@ -58,12 +87,12 @@
   <div class="container">
     <div class="column">
       <textarea id="input" placeholder="入力してください"></textarea>
-      <button id="clearBtn">クリア</button>
+      <button id="clearBtn" type="button">クリア</button>
     </div>
 
     <div class="column">
       <pre><code id="output"></code></pre>
-      <button id="copyBtn">コピー</button>
+      <button id="copyBtn" type="button">コピー</button>
     </div>
   </div>
 
@@ -72,6 +101,7 @@
     const outputBox = document.getElementById("output");
     const copyBtn = document.getElementById("copyBtn");
     const clearBtn = document.getElementById("clearBtn");
+    const outputPre = outputBox.parentElement;
 
     inputBox.addEventListener("input", () => {
       const inputText = inputBox.value;
@@ -101,6 +131,12 @@
       inputBox.value = "";
       outputBox.textContent = "";
     });
+
+    const syncHeight = () => {
+      outputPre.style.height = inputBox.offsetHeight + "px";
+    };
+    new ResizeObserver(syncHeight).observe(inputBox);
+
   </script>
 </body>
 </html>
